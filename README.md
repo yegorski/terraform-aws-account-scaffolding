@@ -17,6 +17,9 @@ Terraform creates the following AWS resources:
 1. S3:
    1. A bucket for storing Terraform state.
    1. In order to avoid potential permission issues when writing a different AWS account, the `bucket-owner-full-control` ACL is applied to the bucket.
+1. VPC
+   1. Uses the [AWS VPC Terraform module][], with most of the defaults.
+   1. One of the reasons to create a new VPC is to have control over the CIDR range, e.g. when designating all traffic as internal based on destination CIDR `10.x.x.x/8`.
 
 ## Usage
 
@@ -25,7 +28,7 @@ Terraform creates the following AWS resources:
 1. Export your AWS root user's key id and secret into `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, respectively.
 1. Run `terraform init`.
 1. Import the state bucket into Terraform `terraform import aws_s3_bucket.bucket bucket-name`
-1. Create and add a `terraform.tfvars` file with the following variables:
+1. Create a `terraform.tfvars` file with the following variables:
 
    ```terraform
    account_id = "YOUR_AWS_ACCOUNT_ID"
@@ -59,4 +62,5 @@ When using AWS roles instead of AWS users (recommended), create `aws_iam_role` a
 
 [aws-okta]: https://github.com/segmentio/aws-okta
 [aws-vault]: https://github.com/99designs/aws-vault
+[aws vpc terraform module]: https://github.com/terraform-aws-modules/terraform-aws-vpc
 [tfswitch]: https://warrensbox.github.io/terraform-switcher

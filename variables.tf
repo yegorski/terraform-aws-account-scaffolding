@@ -17,3 +17,8 @@ variable "tags" {
   type        = "map"
   description = "AWS tags to apply to resources."
 }
+
+variable "vpc_number_of_azs" {
+  type = "string"
+  description = "Number of availability zones to place the VPC in."
+}
