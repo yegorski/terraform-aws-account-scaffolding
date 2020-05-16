@@ -8,18 +8,21 @@ This repo uses Terraform version `0.11.14`.
 
 ## Overview
 
-Terraform creates the following AWS resources:
+![aws-account-scaffolding](files/aws-account-scaffolding.png)
 
-1. IAM:
+Terraform creates the AWS resources listed below.
+
+1. IAM
    1. A user with `AdministratorAccess` policy
-1. DynamoDB:
+1. DynamoDB
    1. A table for tracking Terraform usage. This is a Terraform feature that ensure that no more than one `plan` or `apply` operations are running at the same time.
-1. S3:
+1. S3
    1. A bucket for storing Terraform state.
    1. In order to avoid potential permission issues when writing a different AWS account, the `bucket-owner-full-control` ACL is applied to the bucket.
 1. VPC
    1. Uses the [AWS VPC Terraform module][], with most of the defaults.
    1. One of the reasons to create a new VPC is to have control over the CIDR range, e.g. when designating all traffic as internal based on destination CIDR `10.x.x.x/8`.
+   1. You will likely want to set `enable_nat_gateway = false`. I disabled it because I'm not running any servers and the `NatGateway-Hours` is costing me.
 
 ## Usage
 
@@ -31,7 +34,7 @@ Terraform creates the following AWS resources:
 1. Create a `terraform.tfvars` file with the following variables:
 
    ```terraform
-   account_id = "YOUR_AWS_ACCOUNT_ID"
+   aws_account_id = "YOUR_AWS_ACCOUNT_ID"
 
    admin_user = "YOUR_USERNAME"
 

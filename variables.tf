@@ -1,4 +1,4 @@
-variable "account_id" {
+variable "aws_account_id" {
   type        = "string"
   description = "AWS account ID to create resources in."
 }
@@ -19,6 +19,6 @@ variable "tags" {
 }
 
 variable "vpc_number_of_azs" {
-  type = "string"
+  type        = "string"
   description = "Number of availability zones to place the VPC in."
 }
