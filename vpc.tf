@@ -18,5 +18,7 @@ module "vpc" {
   enable_dns_support   = true
   enable_nat_gateway   = false
 
-  tags = "${ var.tags }"
+  tags                = "${ var.tags }"
+  private_subnet_tags = "${ merge(var.tags, map("Type", "Private")) }"
+  public_subnet_tags  = "${ merge(var.tags, map("Type", "Public")) }"
 }
